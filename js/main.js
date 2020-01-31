@@ -77,17 +77,17 @@ function getDifficulty(){
   if(mode.innerHTML === 'Easy'){
     rows = 5;
     columns = 8;
-    howMany = 5;
+    howMany = 7;
   }
   else if (mode.innerHTML === 'Medium'){
     rows = 8;
     columns = 9;
-    howMany = 8;
+    howMany = 10;
   }
   else if (mode.innerHTML === 'Hard'){
     rows = 10;
     columns = 10;
-    howMany = 12;
+    howMany = 15;
   }
 }
 
