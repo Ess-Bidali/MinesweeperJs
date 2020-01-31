@@ -18,6 +18,7 @@ document.getElementById('begin').addEventListener('click', startGame);
 const grid = document.getElementById('grid');
 let rows;
 let columns;
+let howMany;
 const modal = document.getElementById('modal');
 const result = document.getElementById('result');
 const difficulty = document.getElementById('difficulty');
@@ -34,7 +35,7 @@ function newGame(){
   console.clear();
   setPlayfield();
   printBoard();
-  generateBombs(6);
+  generateBombs(howMany);
   mapValues();
 }
 
@@ -76,14 +77,17 @@ function getDifficulty(){
   if(mode.innerHTML === 'Easy'){
     rows = 5;
     columns = 8;
+    howMany = 5;
   }
   else if (mode.innerHTML === 'Medium'){
     rows = 8;
     columns = 9;
+    howMany = 8;
   }
   else if (mode.innerHTML === 'Hard'){
     rows = 10;
     columns = 10;
+    howMany = 12;
   }
 }
 
@@ -189,7 +193,6 @@ function clicked(event){
 
 //reveals the value for a cell
 function revealCell(cell){
-  console.log('run');
   cell.removeEventListener('mouseup', clicked);
   if(cell.dataset.isRevealed){
     return;
