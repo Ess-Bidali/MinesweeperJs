@@ -1,0 +1,88 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="bomb.ico">
+    <title>Minesweeper</title>
+    <link href="../fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand col-5"><img class="mr-2" style="width: 35px;" src="bomb.ico"></img>Minesweeper-Ess</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="" class="nav-link btn-outline-success mx-2" id="newGame">New Game</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link btn-outline-info dropdown-toggle mx-2" id="mode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Easy</a>
+            <div id="difficulty" class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" id="easy">Easy</a>
+              <a class="dropdown-item" id="medium">Medium</a>
+              <a class="dropdown-item" id="hard">Hard</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div class="opening">
+        <h1>Let's Play a Game : Minesweeper!</h1>
+        <div id="intro">
+          <p class="lead">The default setting for difficulty is <strong>Easy</strong></p>
+          <p class="lead">Setting a different difficulty starts a new game and the previous game is lost</p>
+          <p class="lead pb-3">Click on the button below or click <strong>"New Game"</strong> to begin</p>
+          <button id="begin" class="btn btn-success btn-lg mt-3">Let's Begin!</button>
+ 
+        </div>
+      </div>
+      <div class="container-fluid centered mt-3" id="centered">
+        <table oncontextmenu="return false;" class="table table-bordered table-dark col-10" id="grid">
+          
+        </table>
+      </div>
+
+    </main><!-- /.container -->
+
+    <!-- Modal -->
+    <div class="modall" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="result">
+            
+          </div>
+          <div class="modal-footer pt-2">
+            <button type="button" id="btnNewGame" class="btn btn-success">New Game</button>
+            <button type="button" id="btnClose" class="btn btn-secondary">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script> -->
+    <!-- <script src="../../assets/js/vendor/popper.min.js"></script> -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+    <script></script>
+  </body>
+</html>
