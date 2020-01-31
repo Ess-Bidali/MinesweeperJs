@@ -1,19 +1,21 @@
 (function(){
-//Event Listeners
-// 
+//Event Listeners 
+//modal event listeners
 window.addEventListener('click', modalClicked);
 document.getElementById('btnClose').addEventListener('click', exitModal);
 document.getElementById('btnNewGame').addEventListener('click', exitModal);
 document.getElementById('btnNewGame').addEventListener('click', startGame);
+//navigation event listeners
 document.getElementById('newGame').addEventListener('click', startGame);
-document.getElementById('begin').addEventListener('click', startGame);
-
 document.getElementById('easy').addEventListener('click', select);
 document.getElementById('medium').addEventListener('click', select);
 document.getElementById('hard').addEventListener('click', select);
-const grid = document.getElementById('grid');
+//one-time use event listeners
+document.getElementById('begin').addEventListener('click', startGame);
 
 })();
+
+const grid = document.getElementById('grid');
 let rows;
 let columns;
 const modal = document.getElementById('modal');
@@ -21,11 +23,13 @@ const result = document.getElementById('result');
 const difficulty = document.getElementById('difficulty');
 const mode = document.getElementById('mode');
 
+//button trigger for a new game
 function startGame(event){
   event.preventDefault();
   newGame()
 }
 
+//to enable a new game when triggered by a button or a function
 function newGame(){
   console.clear();
   setPlayfield();
@@ -34,12 +38,14 @@ function newGame(){
   mapValues();
 }
 
+//clears useless intro information on html
 function setPlayfield(){
   document.getElementById('intro').style.display = 'none';
   document.getElementById('centered').style.display = '-webkit-flex';
   document.getElementById('centered').style.display = 'flex';
 }
 
+//builds the board with checkerboard appearance
 function printBoard(){
   getDifficulty();
   grid.innerHTML = "";
@@ -64,8 +70,9 @@ function printBoard(){
   }
 }
 
+//determines board size and number of mines based on user input. 
+//default is 'Easy'
 function getDifficulty(){
-  console.log('got');
   if(mode.innerHTML === 'Easy'){
     rows = 5;
     columns = 8;
@@ -78,17 +85,15 @@ function getDifficulty(){
     rows = 10;
     columns = 10;
   }
-  else{
-    rows = 0;
-    columns = 0;
-  }
 }
 
+//displays selected difficulty level on the html/ui
 function setDifficulty(target){
   mode.innerHTML = target.innerHTML;
   newGame();
 }
 
+//sets a difficulty level based on user selected value
 function select(event){
   difficulty.children[0].classList.remove('selected');
   difficulty.children[1].classList.remove('selected');
@@ -97,6 +102,7 @@ function select(event){
   setDifficulty(event.target);
 }
 
+//generates bombs hidden to the player
 function generateBombs(howMany){
   for(let i = 0; i < howMany; i++){
     let row = Math.floor(Math.random()*(rows));
@@ -111,6 +117,7 @@ function generateBombs(howMany){
   }
 }
 
+//sets values showing surrounding bombs per cell
 function mapValues(){
   for(let r = 0; r < rows; r++){
     for(let c = 0; c < columns; c++){
@@ -120,10 +127,9 @@ function mapValues(){
   }
 }
 
+//calculates bombs surrounding a specific cell
 function surroundingBombs(cell){
-  
   if(cell.dataset.value !== "bomb"){
-
     let row = parseInt(cell.id[0]);
     let col = parseInt(cell.id[2]);
     let numOfBombs = '';
@@ -140,21 +146,23 @@ function surroundingBombs(cell){
     }
     return numOfBombs;
   }
+
   return "bomb";
 }
 
+//returns true if a specified cell has a bomb
 function hasBomb(r,c){
-
   if(grid.rows[r].cells[c].dataset.value === "bomb"){
     return true;
   }
   return false;
 }
 
+//logic for when a cell is clicked
 function clicked(event){
   let cell = event.target;
+  //if it's a right click it toggles flagged status
   if(event.button === 2){
-
     if(cell.dataset.flagged === 'true'){
       cell.dataset.flagged = 'false';
     }
@@ -164,6 +172,8 @@ function clicked(event){
   }
   else{
     revealCell(cell);
+    //winning/losing logic
+    //reveal bombs after either a win or loss, else, continue game
     if(allRevealed()){
       youWin();
       let intervalId = setInterval(revealBombs,500);
@@ -177,6 +187,7 @@ function clicked(event){
   }
 }
 
+//reveals the value for a cell
 function revealCell(cell){
   console.log('run');
   cell.removeEventListener('mouseup', clicked);
@@ -217,6 +228,7 @@ function revealCell(cell){
   return;  
 }
 
+//changes cell appearance once clicked
 function changeBg(cell,withBomb){
   cell.classList.remove('darker');
   if(!withBomb){
@@ -232,6 +244,8 @@ function changeBg(cell,withBomb){
   cell.classList.remove('lighter');
 }
 
+//checks whether player has uncovered all cells that
+//do not contain bombs, which indicates a win
 function allRevealed(){
   for(let r = 0; r < rows; r++){
     for(let c = 0; c < columns; c++){
@@ -245,6 +259,7 @@ function allRevealed(){
   return true;
 }
 
+//shows all the bombs when game ends (after a win or loss)
 function revealBombs(){
   for(let r = 0; r < rows; r++){
     for(let c = 0; c < columns; c++){
@@ -258,6 +273,7 @@ function revealBombs(){
   return;
 }
 
+//ui stuff for once a player loses
 function youLose(){
   showModal();
   result.innerHTML='';
@@ -267,6 +283,7 @@ function youLose(){
   '<p>Better luck next time</p>';
 }
 
+//ui stuff for once a player wins
 function youWin(){
   showModal();
   result.innerHTML='';
